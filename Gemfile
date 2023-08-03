@@ -72,10 +72,6 @@ group :test do
   gem "webdrivers"
 end
 
-<<<<<<< Updated upstream
 group :production do
   gem 'pg'
 end
-=======
-gem 'devise'
->>>>>>> Stashed changes
