@@ -20,15 +20,17 @@
           </div>
           <%# ログインしているときは以下を表示するようにしましょう %>
             <%# <div class="nav__right"> %>
-      <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn'%>
-              <%# <%= link_to "New Proto", root_path, class: :nav__btn %>
-            <%# </div> %>
-          <%# // ログインしているときは上記を表示するようにしましょう %>
-          <%# ログインしていないときは以下を表示するようにしましょう %>
-            <div class="nav__right">
-              <%= link_to "ログイン", root_path, class: :nav__btn %>
-              <%= link_to "新規登録", root_path, class: :nav__btn %>
-            </div>
+            <% if user_signed_in? %>
+              <div class="nav__right">
+                <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn' %>
+                <%= link_to "New Proto", new_prototype_path, class: :nav__btn %> <!-- あなたの新しいプロトタイプのパスに変更してください -->
+              </div>
+            <% else %>
+              <div class="nav__right">
+                <%= link_to "ログイン", new_user_session_path, class: :nav__btn %>
+                <%= link_to "新規登録", new_user_registration_path, class: :nav__btn %>
+              </div>
+            <% end %>
           <%# // ログインしていないときは上記を表示するようにしましょう %>
         </div>
       </div>
