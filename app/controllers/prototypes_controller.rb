@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :edit]
 
   def index
     @prototypes = Prototype.all
@@ -16,6 +16,22 @@ class PrototypesController < ApplicationController
       else
         render :new, status: :unprocessable_entity
       end
+  end
+
+  def edit
+    @prototype = Prototype.find(params[:id])
+    if current_user.id != @item.user.id
+      redirect_to action: :index
+    end
+  end
+
+  def update
+    @prototype = Prototype.find(params[:id])
+    if @prototype.update(prototype_params)
+      redirect_to action: :show
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
