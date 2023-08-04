@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
+
   def show
- 
-  @name = current_user.name
-  @profile = current_user.profile
-  @occupation = current_user.occupation
-  @position = current_user.position
-  @prototypes = current_user.prototypes
+  user = User.find(params[:id])
+  @name = user.name
+  @profile = user.profile
+  @occupation = user.occupation
+  @position = user.position
+  @prototypes = user.prototypes
   end
 end
