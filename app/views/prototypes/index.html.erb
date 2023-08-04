@@ -7,7 +7,9 @@
     <% end %>
     <div class="card__wrapper">
       <% @prototypes.each do |prototype| %>
-        <%= render partial: "prototype", locals: { prototype: prototype } %>
+        <li>
+          <%= render partial: "prototype", locals: { prototype: prototype } %>
+        </li>
       <% end %>
     </div>
   </div>
