@@ -1,4 +1,6 @@
 class PrototypesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     @prototypes = Prototype.all
   end
@@ -8,13 +10,16 @@ class PrototypesController < ApplicationController
   end
 
   def create
-    Prototype.create(prototype_params)
-    redirect_to '/'
+    @prototype = Prototype.new(prototype_params)
+      if @prototype.save
+        redirect_to root_path
+      else
+        render :new, status: :unprocessable_entity
+      end
   end
 
   private
   def prototype_params
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image,).merge(user_id: current_user.id)
   end
-
 end
